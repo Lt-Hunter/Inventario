@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#include <time.h>
-#include <stdlib.h>
 
 #define MAX_PRODUTOS 5
 
@@ -11,23 +9,6 @@ struct Produto {
     float preco;
     int quantidade;
 };
-
-	void medirTempoExecucao(void (*func)()) {
-    clock_t start, end;
-    double cpu_time_used;
-
-    start = clock();
-    func();  // Executa a função passada como parâmetro
-    end = clock();
-
-    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-    printf("Tempo de execução: %f segundos\n", cpu_time_used);
-}
-
-void medirUsoMemoria() {
-    // Esta função pode ser chamada após operações para verificar uso de memória
-    malloc_stats();  // Esta função imprime estatísticas de alocação de memória no terminal
-}
 
 void adicionarProduto(struct Produto produtos[], int *numProdutos) {
     if (*numProdutos >= MAX_PRODUTOS) {
@@ -50,7 +31,7 @@ void adicionarProduto(struct Produto produtos[], int *numProdutos) {
 void listarProdutos(struct Produto produtos[], int numProdutos) {
     printf("Lista de Produtos:\n");
     for (int i = 0; i < numProdutos; i++) {
-        printf("ID: %d | Nome: %s | Preço: %.2f | Quantidade: %d\n", 
+        printf("ID: %d | Nome: %s | PreÃ§o: %.2f | Quantidade: %d\n", 
                produtos[i].id, produtos[i].nome, produtos[i].preco, produtos[i].quantidade);
     }
 }
@@ -58,7 +39,7 @@ void listarProdutos(struct Produto produtos[], int numProdutos) {
 void atualizarPreco(struct Produto produtos[], int numProdutos) {
     int id, encontrado = 0;
     float novoPreco;
-    printf("Digite o ID do produto para atualizar o preço: ");
+    printf("Digite o ID do produto para atualizar o preÃ§o: ");
     scanf("%d", &id);
 
     for (int i = 0; i < numProdutos; i++) {
@@ -72,7 +53,7 @@ void atualizarPreco(struct Produto produtos[], int numProdutos) {
         }
     }
     if (!encontrado) {
-        printf("Produto não encontrado.\n");
+        printf("Produto nÃ£o encontrado.\n");
     }
 }
 
@@ -93,7 +74,7 @@ void atualizarQuantidade(struct Produto produtos[], int numProdutos) {
         }
     }
     if (!encontrado) {
-        printf("Produto não encontrado.\n");
+        printf("Produto nÃ£o encontrado.\n");
     }
 }
 
@@ -114,7 +95,7 @@ void removerProduto(struct Produto produtos[], int *numProdutos) {
         }
     }
     if (!encontrado) {
-        printf("Produto não encontrado.\n");
+        printf("Produto nÃ£o encontrado.\n");
     }
 }
 
@@ -126,7 +107,7 @@ void menu() {
     printf("4. Atualizar Quantidade\n");
     printf("5. Remover Produto\n");
     printf("6. Sair\n");
-    printf("Escolha uma opção: ");
+    printf("Escolha uma opÃ§Ã£o: ");
 }
 
 int main() {
@@ -149,14 +130,11 @@ int main() {
         } else if (opcao == 5) {
             removerProduto(produtos, &numProdutos);
         } else if (opcao != 6) {
-            printf("Opção inválida.\n");
+            printf("OpÃ§Ã£o invÃ¡lida.\n");
         }
 
     } while (opcao != 6);
     
-     printf("Versão Não Fatorada:\n");
-    medirTempoExecucao(executarVersaoNaoFatorada);
-    medirUsoMemoria();
 
     printf("Encerrando o programa.\n");
     return 0;
